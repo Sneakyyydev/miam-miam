@@ -1,0 +1,38 @@
+MIAM-MIAM - gratuit, aucune connexion dans l'appli, aucun code à retaper
+
+A) METTRE L'APPLI EN LIGNE (une fois, gratuit : GitHub Pages, sans badge)
+ - Compte gratuit sur github.com (sert uniquement à héberger les fichiers).
+ - New repository > miam-miam > Public > Create > "uploading an existing file" >
+   glisser TOUS les fichiers du dossier > Commit changes.
+ - Settings > Pages > Deploy from a branch > main / (root) > Save.
+ - Adresse : https://VOTRE-PSEUDO.github.io/miam-miam/
+ - Installer : Android (Chrome) menu ⋮ > Installer l'application ; Windows : icône Installer.
+
+B) SYNCHRO QUI MARCHE TOUT LE TEMPS (recommandé, gratuit, une fois)
+ Sans relais en ligne, les appareils ne se synchronisent que s'ils sont ouverts en même temps.
+ Avec le relais, chaque téléphone se met à jour même si l'autre est fermé.
+ - console.firebase.google.com > Ajouter un projet (Analytics non).
+ - Build > Firestore Database > Créer (production, europe-west).
+ - Onglet Règles, remplacer par ceci puis Publier :
+     rules_version = '2';
+     service cloud.firestore { match /databases/{d}/documents {
+       match /foyers/{f}/{c}/{i} { allow read, write: if true; }
+     } }
+   (les données sont dans un espace au nom secret, connu seulement des appareils invités)
+ - Paramètres du projet > Vos applications > Web </> > copier firebaseConfig.
+ - Dans index.html, remplir la ligne "const CFG={apiKey:"",...}", puis renvoyer le fichier sur GitHub.
+ Aucune connexion ni authentification n'est demandée dans l'appli.
+
+C) ASSOCIER LES DEUX TÉLÉPHONES (une seule fois, sans taper de code)
+ - Téléphone 1 : Réglages > "Inviter l'autre appareil" > envoyer le lien (WhatsApp).
+ - Téléphone 2 : ouvrir le lien (ou le coller dans Réglages > Rejoindre).
+ - C'est définitif. Gardez ce lien privé : il donne accès à vos données.
+
+D) SAUVEGARDE : Réglages > Exporter / Importer (fusionne) de temps en temps.
+
+NOUVEAUTÉS
+ - Menu > "Que cuisiner ce soir ?" : recettes classées selon le stock, restes et produits à finir.
+ - Courses > "Scanner pour ranger" : le produit scanné est rapproché de votre liste, puis rangé en stock.
+ - Date de péremption proposée selon le produit (et 90 jours au congélateur), modifiable.
+ - Rappel "sortir du congélateur" (carte dans le Menu + notification à l'ouverture de l'appli).
+ - Restes : ouvrir un repas du menu > "Restes" ; ils vont en stock et se replanifient dans "+ Repas".
